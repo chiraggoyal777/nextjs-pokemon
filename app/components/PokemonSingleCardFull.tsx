@@ -10,6 +10,14 @@ export default async function PokemonSingleCardFull(props: {
     <PokemonSingleCardBase fullStyled>
       <div className="col-span-full md:col-span-4">
         <div className="aspect-square max-w-80">
+          {/* Next Image having weird issues in slackblitz */}
+          {/* <Image
+            className="w-full"
+            width="240"
+            height="240"
+            src={pokemon.image}
+            alt={pokemon.name}
+          /> */}
           <img
             className="w-full"
             width="240"

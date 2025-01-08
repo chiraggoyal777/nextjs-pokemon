@@ -17,8 +17,8 @@ export async function generateMetadata(
   const previousImages = (await parent).openGraph?.images || [];
 
   return {
-    title: `Everything about ${pokemon.name}`,
-    description: `Description about ${pokemon.name}`,
+    title: `Everything about Pokemon ${pokemon.name}`,
+    description: `Description about Pokemon ${pokemon.name}`,
     openGraph: {
       images: [...previousImages],
     },

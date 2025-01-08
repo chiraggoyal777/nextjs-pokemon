@@ -18,7 +18,7 @@ const PokemonSingleCardMini: React.FC<PokemonCardProps> = ({ pokemon }) => {
           src={pokemon.image}
           alt={capFL(pokemon.name)}
           loading="lazy"
-          loader={customLoader}
+          loader={customLoader} // had to go without optimisation due to slackblitz rendering issue
         />
       </div>
       <div>
