@@ -1,42 +1,36 @@
 "use client";
 
-import { useState } from "react";
+import { usePokemonContext } from "../contexts/PokemonContext";
+import { POKEMON_DEFAULT_TYPE } from "../lib/constants";
+import { capFL } from "../lib/helpers";
 
-type PokemonType = {
-  name: string;
-  url: string;
+type PokeTypesProps = {
+  types: Array<string>;
 };
 
-type PokemonSelectorProps = {
-  types: PokemonType[];
-};
-
-export default function PokemonSelector({ types }: PokemonSelectorProps) {
-  const [selectedType, setSelectedType] = useState<string>("all");
+export default function PokemonSelector({ types }: PokeTypesProps) {
+  const { type, setType } = usePokemonContext();
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedType(event.target.value);
+    setType(event.target.value);
   };
 
   return (
-    <div>
-      <label htmlFor="pokemon-type-select">Choose a Pokemon type:</label>
-      <select
-        className="block w-full bg-gray-100 rounded-md py-2 h-10 pl-2 pr-10 border-2 border-gray-100 focus:border-gray-400 focus:bg-white text-gray-800 transition-colors"
-        id="pokemon-type-select"
-        value={selectedType}
-        onChange={handleSelectChange}
-      >
-        <option value="all">All</option>
-        {types.map((type) => (
-          <option key={type.name} value={type.name}>
-            {type.name}
-          </option>
-        ))}
-      </select>
-      <p>
-        <strong>Selected Type:</strong> {selectedType}
-      </p>
-    </div>
+    <select
+      aria-label="Choose a Pokemon type"
+      className="w-full shadow-lg focus:shadow-xl text-2xl grow bg-white rounded-xl py-3 px-4 border-2 border-white focus:border-cyan-900 focus:bg-white text-cyan-900 transition-colors"
+      id="pokemon-type-select"
+      onChange={handleSelectChange}
+      defaultValue={type}
+    >
+      <option value={POKEMON_DEFAULT_TYPE} className="text-base">
+        {capFL(POKEMON_DEFAULT_TYPE)}
+      </option>
+      {types.map((type) => (
+        <option key={type} value={type} className="text-base">
+          {capFL(type)}
+        </option>
+      ))}
+    </select>
   );
 }

@@ -7,15 +7,29 @@
   --foreground: #171717;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   color: var(--foreground);
-  background: var(--background);
+  background-color: var(--background);
+  background-image: url('https://play.tailwindcss.com/img/beams.jpg');
   font-family: Arial, Helvetica, sans-serif;
+}
+
+*:focus {
+  @apply outline-none ring-0;
+}
+
+.stretched-link::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  pointer-events: auto;
+  content: "";
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.app-container {
+  @apply max-w-5xl mx-auto w-full p-4 lg:p-10 space-y-10;
 }

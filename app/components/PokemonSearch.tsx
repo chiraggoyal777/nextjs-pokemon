@@ -1,51 +1,35 @@
 "use client";
 
-import { useState } from "react";
+import { FormEvent, useRef } from "react";
+import { usePokemonContext } from "../contexts/PokemonContext";
 
 export default function PokemonSearch() {
-  const [searchTerm, setSearchTerm] = useState<string>("");
+  const searchRef = useRef<HTMLInputElement>(null);
+  const { query, setQuery } = usePokemonContext();
 
-  // Handle the input change
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(event.target.value);
-  };
-
-  // Handle search button click (can be expanded to trigger actual search)
-  const handleSearch = () => {
-    console.log("Searching for:", searchTerm);
-    // Implement your search logic here (e.g., trigger API call)
-  };
-
-  // Optionally, handle "Enter" key press
-  const handleKeyPress = (event: React.KeyboardEvent) => {
-    if (event.key === "Enter") {
-      handleSearch();
+  const handleSearch = (e: FormEvent) => {
+    e.preventDefault();
+    if (searchRef.current) {
+      setQuery(searchRef.current.value);
     }
   };
-
   return (
-    <form>
-      <label htmlFor="pokemon-search">Search Pokemon</label>
-
-      <div className="relative flex h-10 w-full">
-
-        {/* Search Input */}
+    <form onSubmit={handleSearch}>
+      <div className="relative flex w-full shadow-lg rounded-xl has-[input:focus]:shadow-xl">
         <input
-          className="grow bg-gray-100 rounded-md rounded-r-none border-r-0 py-2 pr-2 pl-8 border-2 border-gray-100 focus:border-gray-400 focus:bg-white text-gray-800 transition-colors"
+          aria-label="Search Pokemon"
+          ref={searchRef}
+          defaultValue={query}
+          onChange={(e) => setQuery(e.target.value)}
+          className="w-[inherit] text-2xl grow bg-white rounded-xl rounded-r-none border-r-0 py-3 px-4 md:px-6 border-2 border-white focus:border-cyan-900 focus:bg-white text-cyan-900 transition-colors"
           type="search"
-          name="pokemon-search"
-          id="pokemon-search"
-          placeholder="Search"
-          value={searchTerm}
-          onChange={handleInputChange}
-          onKeyDown={handleKeyPress} // To handle Enter key
+          name="search"
+          id="search"
+          placeholder="Pokemon Name"
         />
-
-        {/* Search Button */}
         <button
           type="submit"
-          className="h-100 px-3 py-1 bg-cyan-900 text-gray-50 rounded-r-md hover:bg-cyan-950 transition-colors"
-          onClick={handleSearch}
+          className="text-2xl h-100 px-4 md:px-6 py-3 bg-cyan-900 text-gray-50 rounded-r-xl hover:bg-cyan-950 transition-colors"
         >
           Search
         </button>
