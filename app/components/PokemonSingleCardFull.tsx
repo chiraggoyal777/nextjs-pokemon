@@ -1,7 +1,5 @@
-import Image from "next/image";
 import { PokemonSingle } from "../lib/types";
 import PokemonSingleCardBase from "./PokemonSingleCardBase";
-import { customLoader } from "../lib/helpers";
 
 export default async function PokemonSingleCardFull(props: {
   pokemon: PokemonSingle;
@@ -12,14 +10,12 @@ export default async function PokemonSingleCardFull(props: {
     <PokemonSingleCardBase fullStyled>
       <div className="col-span-full md:col-span-4">
         <div className="aspect-square max-w-80">
-          <Image
+          <img
             className="w-full"
             width="240"
             height="240"
             src={pokemon.image}
             alt={pokemon.name}
-            priority
-            loader={customLoader}
           />
         </div>
       </div>
