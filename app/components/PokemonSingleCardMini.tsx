@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import PokemonSingleCardBase from "./PokemonSingleCardBase";
-import { capFL } from "../lib/helpers";
+import { capFL, customLoader } from "../lib/helpers";
 
 interface PokemonCardProps {
   pokemon: { id: string; name: string; image: string };
@@ -18,6 +18,7 @@ const PokemonSingleCardMini: React.FC<PokemonCardProps> = ({ pokemon }) => {
           src={pokemon.image}
           alt={capFL(pokemon.name)}
           loading="lazy"
+          loader={customLoader}
         />
       </div>
       <div>

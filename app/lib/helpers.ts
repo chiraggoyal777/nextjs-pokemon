@@ -10,3 +10,6 @@ export function capFL(input: string): string {
   }
   return input.charAt(0).toUpperCase() + input.slice(1);
 }
+export const customLoader = ({ src }: { src: string }) => {
+  return src; // for bypassing image optimisations
+};
