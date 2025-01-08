@@ -41,7 +41,7 @@ export default async function SinglePokemonPage({
           Home
         </Link>
         <div className="text-xl py-2">
-          Everything about {`${capFL(pokemon.name)}`}
+          Everything about Pokemon {`${capFL(pokemon.name)}`}
         </div>
       </div>
       <PokemonSingleCardFull pokemon={pokemon} />
